@@ -18,11 +18,11 @@ public class MainActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);//act 'inflate' - nipuah - reading the xml file
     }
 
     public void btnClick (View view){
-        Intent intent = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(this, SecondActivity.class);//the intention to move a client to another Activity (screen)
         //intent.putExtra(FIRST_NAME, "Juda");
        //intent.putExtra(AGE, "29");
 
@@ -32,7 +32,7 @@ public class MainActivity extends Activity{
         Person p = new Person("Juda", "Cossa", 29);
         extras.putSerializable("person", p);
 
-        intent.putExtras(extras);
+        intent.putExtras(extras);//attach the Bundle object to the Intent object
 
         //startActivity(Intent.createChooser(intent, "Please Choose"));
         startActivityForResult(intent, REQUEST_CODE);
