@@ -16,8 +16,8 @@
             </intent-filter>
         </activity>
         <receiver android:name=".MyBroadcastReceiver">
-            <intent-filter>
-                <action android:name="My_Specific_Option"/>
+            <intent-filter android:priority="0">
+                <action android:name="MY_SPECIFIC_ACTION"></action>
             </intent-filter>
         </receiver>
     </application>

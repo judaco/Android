@@ -14,5 +14,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver{
     public void onReceive(Context context, Intent intent) {
         String juda = intent.getStringExtra("Juda");
         Toast.makeText(context, "Juda " + juda, Toast.LENGTH_SHORT).show();
+        abortBroadcast();//stop the string (intent), don't call to other broadcasts
     }
 }

@@ -11,11 +11,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent("My_Specific_Option");
+        Intent intent = new Intent("MY_SPECIFIC_ACTION");
         intent.putExtra("Juda", "Cossa");
-        intent.putExtra("abita", "in");
-        intent.putExtra("paese", "Israele");
-
-        sendBroadcast(intent);
+        sendBroadcast(intent);//no priority, all random
+        sendOrderedBroadcast(intent, null);//the priority is important
     }
 }
