@@ -7,22 +7,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="First Activity"/>
+        android:text="First" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Second Activity"
-        android:onClick="btnGoToSecondActivity"/>
+        android:text="Second"
+        android:onClick="btnGoToSecond"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Third Activity"
-        android:onClick="btnGoToThirdActivity"/>
-
+        android:text="Third"
+        android:onClick="btnGoToThird"/>
 </LinearLayout>

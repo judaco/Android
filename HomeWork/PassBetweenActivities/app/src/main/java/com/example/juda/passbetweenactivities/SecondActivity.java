@@ -10,17 +10,40 @@ import android.view.View;
  */
 
 public class SecondActivity extends Activity {
+    private static final int REQUEST_CODE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        int goTO = getIntent().getIntExtra(FirstActivity.GO_TO, -1);
+        if (goTO == 3){
+            goTo3rd();
+        }
     }
 
-    public void btnClick(View view) {
+    private void goTo3rd(){
+        Intent intent = new Intent(this, ThirdActivity.class);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
 
-        Intent intent1 = new Intent(this, FirstActivity.class);
-        Intent intent3 = new Intent(this, ThirdActivity.class);
+    public void btnGoToFirstActivity(View view) {
+        finish();
+    }
 
-        startActivity(Intent.createChooser(intent3, "Choose"));
+    public void btnGoToThirdActivity(View view) {
+        goTo3rd();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE){
+            if (resultCode == RESULT_OK){
+                int goTO = data.getIntExtra(FirstActivity.GO_TO, -1);
+                if (goTO ==1)
+                    finish();
+            }
+        }
     }
 }
