@@ -30,7 +30,7 @@ public class MainActivity extends Activity{
         /*
         //Send email - Creating a mail for client, he need to click on send button
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setData(Uri.parse("malito:"));
+        intent.setData(Uri.parse("mailto:"));
         String [] to = {"some1@gmail.com", "some2@gmail.com"};
         String [] cc = {"some3@gmail.com", "some4@gmail.com"};
         intent.putExtra(Intent.EXTRA_EMAIL, to);
@@ -42,8 +42,8 @@ public class MainActivity extends Activity{
         */
 
         Intent intent = new Intent("SEARCH_PEOPLE");
-        intent.putExtra("firstName", "Liran");
-        intent.putExtra("lastName", "Ely");
+        intent.putExtra("firstName", "Sagi");
+        intent.putExtra("lastName", "Ribak");
         startActivity(intent);
     }
 }
