@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rating"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rate this app!" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/starStyle"
+        android:id="@+id/star1"
+        android:tag="1"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/starStyle"
+        android:id="@+id/star2"
+        android:tag="2"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/starStyle"
+        android:id="@+id/star3"
+        android:tag="3"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/starStyle"
+        android:id="@+id/star4"
+        android:tag="4"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/starStyle"
+        android:id="@+id/star5"
+        android:tag="5"/>
+</LinearLayout>
