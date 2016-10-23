@@ -20,30 +20,24 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        timePicker = (TimePicker)findViewById(R.id.timePicker);
+        timePicker = (TimePicker) findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
     }
 
     public void btnOnClick(View view) {
+        int minute = 0;
+        int hour = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int minute = timePicker.getMinute();
-        }else{
-            timePicker.getCurrentMinute();
+            minute = timePicker.getMinute();
+            hour = timePicker.getHour();
+        } else {
+            minute = timePicker.getCurrentMinute();
+            hour = timePicker.getCurrentHour();
         }
-
-        int hour = timePicker.getCurrentHour();
-        int minute = timePicker.getCurrentMinute();
-
-        String time =  hour < 10 ? "0" : "";
-        time += hour + ":";
-        if(minute < 10)
-            time += "0";
-        time += minute;
-
-        NumberFormat formatter = new DecimalFormat("00");
-        time = formatter.format(hour) + ":" + formatter.format(minute);
-
-        Toast.makeText(MainActivity.this, time, Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, ((hour < 10) ? "0" : "") + hour + ":" + ((minute < 10) ? "0" : "") + minute,
+                Toast.LENGTH_SHORT).show();
+        NumberFormat numberFormat = new DecimalFormat("00");
+        Toast.makeText(this, numberFormat.format(hour) + ":" +
+                numberFormat.format(minute), Toast.LENGTH_SHORT).show();
     }
 }
