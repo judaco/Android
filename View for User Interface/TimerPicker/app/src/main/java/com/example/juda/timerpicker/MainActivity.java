@@ -1,5 +1,6 @@
 package com.example.juda.timerpicker;
 
+import android.app.TimePickerDialog;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,15 +15,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        timePicker = (TimePicker)findViewById(R.id.timePicker);
+        timePicker = (TimePicker) findViewById(R.id.timePicker);
 
         timePicker.setIs24HourView(true);
     }
 
-    public void btnOnClick (View view){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+    public void btnOnClick(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int minute = timePicker.getMinute();
         }//else{
-           // timePicker.getCurrentMinute();
-        }
+        // timePicker.getCurrentMinute();
+
+        TimePickerDialog
     }
+}
+
