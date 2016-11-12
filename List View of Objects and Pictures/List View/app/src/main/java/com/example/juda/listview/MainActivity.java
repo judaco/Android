@@ -129,7 +129,7 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //CheckedTextView checkedTextView = (CheckedTextView)view;
                 //boolean checked = checkedTextView.isChecked();
-                Toast.makeText(MainActivity.this, "You clicked on" + clubNames[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "You clicked on " + clubNames[position], Toast.LENGTH_SHORT).show();
             }
         });
     }
