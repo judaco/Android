@@ -38,10 +38,10 @@ public class ClubArrayAdapter extends ArrayAdapter<Club> {
         ViewContainer viewContainer;
         View view = convertView;
 
-        // if created for the firs time
+        // if created for the first time
         if (view == null){
             LayoutInflater layoutInflater = activity.getLayoutInflater();
-            view = layoutInflater.inflate(R.layout.item_club,null);
+            view = layoutInflater.inflate(R.layout.item_club,null, true);
             viewContainer = new ViewContainer();
             viewContainer.txtClub = (TextView) view.findViewById(R.id.txtClub);
             viewContainer.imgClubs = (ImageView) view.findViewById(R.id.imgClub);

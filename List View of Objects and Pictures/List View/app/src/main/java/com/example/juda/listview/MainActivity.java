@@ -19,16 +19,16 @@ public class MainActivity extends Activity {
             "SL Benfica", "Sporting CP", "AC Milan", "AS Roma", "Juventus FC", "SSC Napoli",
             "AFC Ajax", "Feyenoord", "PSV Eindhoven", "Paris Saint Germain FC", "AS Monaco FC",
             "Olympique de Marseille", "Olympique Lyonnais", "FC Bayern Munchen", "Bayer 04 Leverkusen",
-            "BV Borussia Dortmund"
+            "BV Borussia Dortmund","Maccabi Haifa FC"
     };
     //1 more way to enter images into the list
     int [] images = {R.drawable.liverpool_fc,R.drawable.manchester_city_fc,R.drawable.manchester_united_fc,
-    R.drawable.fc_barcelona,R.drawable.arsenal_fc,R.drawable.chelsea_fc,R.drawable.real_madrid_cf,
-    R.drawable.sevilla_fc,R.drawable.club_atletico_de_madrid,R.drawable.fc_porto,R.drawable.sl_benfica,
-    R.drawable.sporting_cp,R.drawable.ac_milan,R.drawable.as_roma,R.drawable.juventus_fc,R.drawable.ssc_napoli,
-    R.drawable.afc_ajax,R.drawable.feyenoord,R.drawable.psv_eindhoven,R.drawable.paris_saint_germain_fc,
-    R.drawable.as_monaco_fc,R.drawable.olympique_de_marseille,R.drawable.olympique_lyonnais,R.drawable.fc_bayern_munchen,
-    R.drawable.bayer_04_leverkusen,R.drawable.bv_borussia_dortmund};
+            R.drawable.fc_barcelona,R.drawable.arsenal_fc,R.drawable.chelsea_fc,R.drawable.real_madrid_cf,
+            R.drawable.sevilla_fc,R.drawable.club_atletico_de_madrid,R.drawable.fc_porto,R.drawable.sl_benfica,
+            R.drawable.sporting_cp,R.drawable.ac_milan,R.drawable.as_roma,R.drawable.juventus_fc,R.drawable.ssc_napoli,
+            R.drawable.afc_ajax,R.drawable.feyenoord,R.drawable.psv_eindhoven,R.drawable.paris_saint_germain_fc,
+            R.drawable.as_monaco_fc,R.drawable.olympique_de_marseille,R.drawable.olympique_lyonnais,R.drawable.fc_bayern_munchen,
+            R.drawable.bayer_04_leverkusen,R.drawable.bv_borussia_dortmund};
 
     ListView list1;
     List<Club>clubs;
