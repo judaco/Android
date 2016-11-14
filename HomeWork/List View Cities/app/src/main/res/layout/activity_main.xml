@@ -17,10 +17,10 @@
         android:text="Your city is ? "
         android:textSize="20sp"/>
 
-<ListView
+    <ListView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="30dp"
-    android:id="@+id/lv_cities"></ListView>
+    android:id="@+id/lv_cities"/>
 
 </RelativeLayout>

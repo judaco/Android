@@ -6,10 +6,12 @@ package com.example.juda.listview;
 
 public class Club {
     private String name;
+    private boolean selected;
     private int image;
 
-    public Club(String name, int image){
+    public Club(String name, boolean selected, int image) {
         this.name = name;
+        this.selected = selected;
         this.image = image;
     }
 
@@ -21,11 +23,23 @@ public class Club {
         this.name = name;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
     public int getImage() {
         return image;
     }
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public void flipSelected() {
+        setSelected(!isSelected());
     }
 }
