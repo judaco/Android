@@ -18,9 +18,7 @@
         android:textSize="28dp"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_alignParentTop="true"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="38dp"
@@ -29,17 +27,16 @@
         android:onClick="btnAdd"
         android:background="@android:color/holo_green_light"
         android:textColor="@android:color/background_light"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/userNameList"
         android:layout_weight="1"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/button2"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
+        android:focusable="false"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="40dp">
+    </ListView>
 
 </RelativeLayout>

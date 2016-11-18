@@ -19,9 +19,6 @@ import java.util.List;
 
 public class MainActivity extends Activity implements Fragment_Add_Edit.FragmentResource{
 
-    String [] userNames = {"Juda", "Tami", "Ami", "Rami", "Gabi", "Fabi", "Shabi", "Ali"};
-    String [] passwords = {"juda", "tami", "ami", "rami", "gabi", "fabi", "shabi", "ali"};
-
     ListView userNameList;
     List <User> users;
     int p;
@@ -33,18 +30,20 @@ public class MainActivity extends Activity implements Fragment_Add_Edit.Fragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
+        //inflate the array list with date = add user into the array list
         userNameList = (ListView)findViewById(R.id.userNameList);
         users = new ArrayList<>();
         users.add(new User("Juda", "juda"));
         users.add(new User("Fabi", "fabi"));
 
+        //set user into the adapter = telling the listview to set as the adapter
+        //This is our custom adapter = AdapterList
         adapterList = new AdapterList(this,users);
         userNameList.setAdapter(adapterList);
+        //get on item click listener
         userNameList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long z) {
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 fragmentManager= getFragmentManager();
                 Fragment_Add_Edit fragmentAddEdit = new Fragment_Add_Edit();
                 fragmentAddEdit.setEdit(true);
@@ -53,7 +52,6 @@ public class MainActivity extends Activity implements Fragment_Add_Edit.Fragment
                 fragmentAddEdit.setPassword(users.get(i).getPassword());
                 fragmentAddEdit.setUser(users.get(i).getUsername());
                 fragmentAddEdit.show(fragmentManager, "");
-
             }
         });
 
@@ -62,6 +60,7 @@ public class MainActivity extends Activity implements Fragment_Add_Edit.Fragment
     @Override
     public void addNewUser(String username, String password) {
         users.add(new User(username,password));
+        adapterList.notifyDataSetChanged();
     }
 
     @Override

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,13 +7,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="28dp"
         android:id="@+id/txtUser"/>
     
     <Button
         android:layout_width="67dp"
         android:layout_height="34dp"
         android:id="@+id/btnDelete"
+        android:focusable="false"
         android:text="Delete"
         android:background="@android:color/holo_red_dark"
-        android:textColor="@android:color/background_light" />
+        android:textColor="@android:color/background_light"/>
 </LinearLayout>

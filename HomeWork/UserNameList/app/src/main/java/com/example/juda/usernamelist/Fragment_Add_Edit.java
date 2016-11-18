@@ -67,7 +67,7 @@ public class Fragment_Add_Edit extends DialogFragment {
         }else{
             txtFrag.setText("New username or password:");
             editUser.setHint("username");
-            editUser.setHint("password");
+            editPass.setHint("password");
             btnFragment.setText("New");
         }
         btnFragment.setOnClickListener(onClickListener);
