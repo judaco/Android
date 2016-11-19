@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +59,7 @@ public class MainActivity extends Activity implements Fragment_Add_Edit.Fragment
     @Override
     public void addNewUser(String username, String password) {
         users.add(new User(username,password));
+        userNameList.setAdapter(adapterList);
         adapterList.notifyDataSetChanged();
     }
 
@@ -73,6 +73,7 @@ public class MainActivity extends Activity implements Fragment_Add_Edit.Fragment
         fragmentManager = getFragmentManager();
         Fragment_Add_Edit fragment_add_edit = new Fragment_Add_Edit();
         fragment_add_edit.setEdit(false);
+        fragment_add_edit.setCancelable(false);
         fragment_add_edit.setListener(this);
         fragment_add_edit.show(fragmentManager,"");
     }
@@ -110,7 +111,7 @@ public class MainActivity extends Activity implements Fragment_Add_Edit.Fragment
             viewContainer.Delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    users.remove(position);
+                        users.remove(position);
                     adapterList.notifyDataSetChanged();
                     Toast.makeText(MainActivity.this, "You deleted: " + users.get(position).getUsername(), Toast.LENGTH_SHORT).show();
                 }

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textSize="28dp"
         android:id="@+id/txtUser"/>
-    
+
     <Button
         android:layout_width="67dp"
         android:layout_height="34dp"
@@ -17,5 +17,7 @@
         android:focusable="false"
         android:text="Delete"
         android:background="@android:color/holo_red_dark"
-        android:textColor="@android:color/background_light"/>
+        android:textColor="@android:color/background_light"
+        android:layout_marginLeft="30dp" />
+
 </LinearLayout>
