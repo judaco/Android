@@ -111,9 +111,9 @@ public class MainActivity extends Activity implements Fragment_Add_Edit.Fragment
             viewContainer.Delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(MainActivity.this, "You deleted: " + users.get(position).getUsername(), Toast.LENGTH_SHORT).show();
                         users.remove(position);
                     adapterList.notifyDataSetChanged();
-                    Toast.makeText(MainActivity.this, "You deleted: " + users.get(position).getUsername(), Toast.LENGTH_SHORT).show();
                 }
             });
 
