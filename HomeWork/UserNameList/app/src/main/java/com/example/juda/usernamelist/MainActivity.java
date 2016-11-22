@@ -114,7 +114,10 @@ public class MainActivity extends Activity implements Fragment_Add_Edit.Fragment
                     Toast.makeText(MainActivity.this, "You deleted: " + users.get(position).getUsername(), Toast.LENGTH_SHORT).show();
                         users.remove(position);
                     adapterList.notifyDataSetChanged();
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
                 }
             });
 
