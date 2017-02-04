@@ -19,6 +19,7 @@ public class Database {
         INTEGER, REAL, TEXT, BLOB
     }
 
+
     static class Column{
         String name;
         Type type;
@@ -63,13 +64,16 @@ public class Database {
         }
     }
 
-    public static abstract class Table{
-        static Column[] columns;
-        static String name;
+    static abstract class Table{
+        Column[] columns;
+        String name;
 
+        public Table(Column[] columns, String name) {
+            this.columns = columns;
+            this.name = name;
+        }
 
-
-        public static String getCreate(){
+        String getCreate(){
             String s = "CREATE TABLE " + name + "(";
             for (int i = 0; i < columns.length; i++) {
                 s += columns[i].getCreate();
@@ -80,11 +84,11 @@ public class Database {
             return s;
         }
 
-        public static String getDrop(){
+        String getDrop(){
             return "DROP TABLE IF EXISTS " + name;
         }
 
-        public static String[] getAllColumns(){
+        String[] getAllColumns(){
             String[] columnNames = new String[columns.length];
             for (int i = 0; i < columns.length; i++) {
                 columnNames[i] = columns[i].name;
@@ -94,50 +98,47 @@ public class Database {
 
     }
 
-    public static class TableProducts extends Table{
 
-
-        static {
-            columns = new Column[]{
+    static class TableProducts extends Table{
+        TableProducts() {
+            super(new Column[]{
                     new Column("ProductID",Type.INTEGER, true, true, false),
                     new Column("ProductName", Type.TEXT, false, false, true),
                     new Column("CategoryID", Type.INTEGER, false, false, true),
                     new Column("UnitPrice", Type.REAL, false, false, true),
                     new Column("UnitsInStock", Type.INTEGER, false, false, true),
                     new Column("Discontinued", Type.INTEGER, false, false, true)
-            };
-            name = "Products";
+            }, "Products");
         }
+
+
 
     }
 
-    public static class TableOrders extends Table{
+    static class TableOrders extends Table{
 
 
-        static {
-            columns = new Column[]{
+        TableOrders() {
+            super(new Column[]{
                     new Column("OrderID", Type.INTEGER, true, true, false),
                     new Column("OrderDate", Type.INTEGER, false, false, true),
                     new Column("CustomerID", Type.INTEGER, false, false, true)
-            };
-            name = "Orders";
-
+            },"Orders");
         }
 
     }
 
-    public static class TableOrderDetails extends Table{
+    static class TableOrderDetails extends Table{
 
 
-        static {
-            columns = new Column[]{
+        TableOrderDetails() {
+            super(new Column[]{
                     new Column("OrderID", Type.INTEGER, false, false, true),
                     new Column("ProductID", Type.INTEGER, false, false, true),
                     new Column("UnitPrice", Type.REAL, false, false, true),
                     new Column("Quantity", Type.REAL, false, false, true),
                     new Column("Discount", Type.REAL, false, false, true)
-            };
-            name = "OrderDetails";
+            },"OrderDetails");
         }
 
     }
@@ -145,6 +146,17 @@ public class Database {
     private static SQLiteDatabase db;
     private static DatabaseHelper helper;
     private static boolean isWritable = false;
+
+
+    private static TableProducts tableProducts;
+    private static TableOrders tableOrders;
+    private static TableOrderDetails tableOrderDetails;
+
+    static {
+        tableProducts = new TableProducts();
+        tableOrders = new TableOrders();
+        tableOrderDetails = new TableOrderDetails();
+    }
 
     public static void start(Context context){
         if(helper == null)
@@ -188,19 +200,19 @@ public class Database {
         if(helper == null || db == null || isWritable == false)
             throw new IllegalStateException();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TableProducts.columns[1].name, productName);
-        contentValues.put(TableProducts.columns[2].name, categoryId);
-        contentValues.put(TableProducts.columns[3].name, unitPrice);
-        contentValues.put(TableProducts.columns[4].name, unitsInStock);
-        contentValues.put(TableProducts.columns[5].name, discontinued ? 1 : 0);
-        return db.insert(TableProducts.name, null, contentValues);
+        contentValues.put(tableProducts.columns[1].name, productName);
+        contentValues.put(tableProducts.columns[2].name, categoryId);
+        contentValues.put(tableProducts.columns[3].name, unitPrice);
+        contentValues.put(tableProducts.columns[4].name, unitsInStock);
+        contentValues.put(tableProducts.columns[5].name, discontinued ? 1 : 0);
+        return db.insert(tableProducts.name, null, contentValues);
     }
 
     public static boolean deleteProduct(long productId){
         if(helper == null || db == null || isWritable == false)
             throw new IllegalStateException();
-        return db.delete(TableProducts.name,
-                TableProducts.columns[0].name + "=" + productId, null) > 0;
+        return db.delete(tableProducts.name,
+                tableProducts.columns[0].name + "=" + productId, null) > 0;
 
     }
 
@@ -210,21 +222,34 @@ public class Database {
         if(helper == null || db == null || isWritable == false)
             throw new IllegalStateException();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TableProducts.columns[1].name, productName);
-        contentValues.put(TableProducts.columns[2].name, categoryId);
-        contentValues.put(TableProducts.columns[3].name, unitPrice);
-        contentValues.put(TableProducts.columns[4].name, unitsInStock);
-        contentValues.put(TableProducts.columns[5].name, discontinued ? 1 : 0);
-        return db.update(TableProducts.name, contentValues,
-                TableProducts.columns[0].name + "=" + productId, null) > 0;
+        contentValues.put(tableProducts.columns[1].name, productName);
+        contentValues.put(tableProducts.columns[2].name, categoryId);
+        contentValues.put(tableProducts.columns[3].name, unitPrice);
+        contentValues.put(tableProducts.columns[4].name, unitsInStock);
+        contentValues.put(tableProducts.columns[5].name, discontinued ? 1 : 0);
+        return db.update(tableProducts.name, contentValues,
+                tableProducts.columns[0].name + "=" + productId, null) > 0;
     }
 
     public static Cursor getAllProducts(){
         if(helper == null || db == null)
             throw new IllegalStateException();
-        return db.query(TableProducts.name, TableProducts.getAllColumns(), null, null, null, null, null);
+        return db.query(tableProducts.name, tableProducts.getAllColumns(), null, null, null, null, null);
     }
-    
+
+    public static int getProductsCount(){
+        if(helper == null || db == null)
+            throw new IllegalStateException();
+        Cursor cursor =
+                db.rawQuery("SELECT COUNT(*) FROM Products", null);
+        int count = 0;
+        while(cursor.moveToNext()){
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
     private static class DatabaseHelper extends SQLiteOpenHelper{
         public DatabaseHelper(Context context){
             super(context, "sales.db", null, DATABASE_VERSION);
@@ -232,16 +257,16 @@ public class Database {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(TableProducts.getCreate());
-            db.execSQL(TableOrders.getCreate());
-            db.execSQL(TableOrderDetails.getCreate());
+            db.execSQL(tableProducts.getCreate());
+            db.execSQL(tableOrders.getCreate());
+            db.execSQL(tableOrderDetails.getCreate());
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL(TableProducts.getDrop());
-            db.execSQL(TableOrders.getDrop());
-            db.execSQL(TableOrderDetails.getDrop());
+            db.execSQL(tableProducts.getDrop());
+            db.execSQL(tableOrders.getDrop());
+            db.execSQL(tableOrderDetails.getDrop());
             onCreate(db);
         }
     }
