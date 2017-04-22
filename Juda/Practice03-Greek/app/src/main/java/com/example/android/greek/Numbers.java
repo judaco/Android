@@ -1,4 +1,4 @@
-package com.example.android.miwok;
+package com.example.android.greek;
 
 import android.content.Context;
 import android.media.AudioManager;
@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.example.android.greek.R;
+import com.example.android.greek.Word;
+import com.example.android.greek.WordAdapter;
 
 import java.util.ArrayList;
 
