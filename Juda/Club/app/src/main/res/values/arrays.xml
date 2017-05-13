@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- These are the options displayed in the gender drop-down Spinner -->
+    <string-array name="array_country_options">
+        <item>Albania</item>
+        <item>Andorra</item>
+        <item>Armenia</item>
+        <item>Azerbaijan</item>
+        <item>England</item>
+        <item>Israel</item>
+    </string-array>
+</resources>
