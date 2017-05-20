@@ -1,5 +1,6 @@
 package com.example.juda.club.data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -8,9 +9,15 @@ import android.provider.BaseColumns;
 
 public final class ClubContract {
 
+    public static final String CONTENT_AUTHORITY = "com.example.juda.club";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public static final String PATH_CLUBS = "clubs";
+
     private ClubContract(){}
 
     public static final class ClubEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_CLUBS);
 
         public final static String TABLE_NAME = "clubs";
 

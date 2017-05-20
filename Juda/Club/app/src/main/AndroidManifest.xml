@@ -25,6 +25,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ClubActivity"/>
         </activity>
+        <provider
+            android:authorities="com.example.juda.club"
+            android:name=".data.ClubProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
