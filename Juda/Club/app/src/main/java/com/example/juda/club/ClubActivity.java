@@ -2,8 +2,10 @@ package com.example.juda.club;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +18,11 @@ import android.widget.TextView;
 import com.example.juda.club.data.ClubContract;
 import com.example.juda.club.data.ClubContract.ClubEntry;
 import com.example.juda.club.data.ClubDBHelper;
+import com.example.juda.club.data.ClubProvider;
 
 public class ClubActivity extends AppCompatActivity {
 
-    private ClubDBHelper dbHelper;
+    //private ClubDBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class ClubActivity extends AppCompatActivity {
             }
         });
 
-        dbHelper = new ClubDBHelper(this);
+        //dbHelper = new ClubDBHelper(this);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class ClubActivity extends AppCompatActivity {
         //ClubDBHelper dbHelper = new ClubDBHelper(this);
 
         // Create and/or open a database to read from it
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        //SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         // Perform this raw SQL query "SELECT * FROM pets"
         // to get a Cursor that contains all rows from the pets table.
@@ -66,8 +69,10 @@ public class ClubActivity extends AppCompatActivity {
                 ClubEntry.COLUMN_STADIUM_CAPACITY, ClubEntry.COLUMN_COUNTRY, ClubEntry.COLUMN_FOUNDATION_YEAR
         };
 
-        Cursor cursor = db.query(ClubEntry.TABLE_NAME,
-                projection, null, null, null, null, null, null);
+        Cursor cursor = getContentResolver().query(ClubEntry.CONTENT_URI, projection, null, null, null, null);
+
+//        Cursor cursor = db.query(ClubEntry.TABLE_NAME,
+//                projection, null, null, null, null, null, null);
 
         TextView displayView = (TextView)findViewById(R.id.txtview_club);
 
@@ -133,7 +138,7 @@ public class ClubActivity extends AppCompatActivity {
 
     private void insertClub(){
         // Gets the data repository in write mode
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        //SQLiteDatabase db = dbHelper.getWritableDatabase();
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
 
@@ -143,10 +148,12 @@ public class ClubActivity extends AppCompatActivity {
         values.put(ClubEntry.COLUMN_COUNTRY, "England");
         values.put(ClubEntry.COLUMN_FOUNDATION_YEAR, 1866);
 
-        // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(ClubEntry.TABLE_NAME, null, values);
+        Uri newUri = getContentResolver().insert(ClubEntry.CONTENT_URI, values);
 
-        Log.v("ClubActivity", "New row id " + newRowId);
+        // Insert the new row, returning the primary key value of the new row
+        //long newRowId = db.insert(ClubEntry.TABLE_NAME, null, values);
+
+        //Log.v("ClubActivity", "New row id " + newRowId);
     }
 
     @Override

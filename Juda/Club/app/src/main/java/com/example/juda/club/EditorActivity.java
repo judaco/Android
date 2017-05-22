@@ -2,6 +2,7 @@ package com.example.juda.club;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -86,10 +87,10 @@ import com.example.juda.club.data.ClubDBHelper;
             int capacity = Integer.parseInt(stadiumCapacity.getText().toString().trim());
             int foundation = Integer.parseInt(foundationYear.getText().toString().trim());
 
-            ClubDBHelper dbHelper = new ClubDBHelper(this);
+            //ClubDBHelper dbHelper = new ClubDBHelper(this);
 
             // Gets the data repository in write mode
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            //SQLiteDatabase db = dbHelper.getWritableDatabase();
             // Create a new map of values, where column names are the keys
             ContentValues values = new ContentValues();
 
@@ -99,13 +100,16 @@ import com.example.juda.club.data.ClubDBHelper;
             values.put(ClubEntry.COLUMN_COUNTRY, mCountry);
             values.put(ClubEntry.COLUMN_FOUNDATION_YEAR, foundation);
 
-            // Insert the new row, returning the primary key value of the new row
-            long newRowId = db.insert(ClubEntry.TABLE_NAME, null, values);
+            // Insert a new club into the provider, returning the content URI for the new club.
+            Uri newUri = getContentResolver().insert(ClubEntry.CONTENT_URI, values);
 
-            if (newRowId == -1){
+            // Insert the new row, returning the primary key value of the new row
+            //long newRowId = db.insert(ClubEntry.TABLE_NAME, null, values);
+
+            if (newUri == null){
                 Toast.makeText(this, "Error with saving new club", Toast.LENGTH_SHORT).show();
             }else {
-                Toast.makeText(this, "Club saved with an ID: " + newRowId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "New club saved", Toast.LENGTH_SHORT).show();
             }
         }
 
