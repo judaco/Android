@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import com.example.juda.club.data.ClubContract.ClubEntry;
+import android.content.ContentResolver;
 
 import static android.R.attr.cacheColorHint;
 import static android.R.attr.fingerprintAuthDrawable;
@@ -70,23 +71,12 @@ public class ClubProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Can't query unknown Uri" + uri);
         }
+        //set notification URI for the cursor
+        //then we know which content URI the cursor created for and if the data in URI has changed,
+        //then we need to update the cursor
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
-
-
-    @Override
-    public String getType(@NonNull Uri uri) {
-        final int match = uriMatcher.match(uri);
-        switch (match){
-            case CLUBS:
-                return ClubEntry.CONTENT_LIST_TYPE;
-            case CLUB_ID:
-                return ClubEntry.CONTENT_ITEM_TYPE;
-            default:
-                throw new IllegalStateException("Unknown URI " + uri + " with match" + match);
-        }
-    }
-
 
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
@@ -126,7 +116,7 @@ public class ClubProvider extends ContentProvider {
 
         if (values.containsKey(ClubEntry.COLUMN_FOUNDATION_YEAR)){
             Integer year = values.getAsInteger(ClubEntry.COLUMN_FOUNDATION_YEAR);
-            if (year < 1850 && year > 2017){
+            if (year < 1850 || year > 2017){
                 throw new IllegalArgumentException("Please insert a number betwenn 1850 to 2017");
             }
         }
@@ -143,28 +133,10 @@ public class ClubProvider extends ContentProvider {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
             return null;
         }
+        //notify to all listeners that the data has changed for club content URI
+        getContext().getContentResolver().notifyChange(uri, null);
         // Return the new URI with the ID (of the newly inserted row) appended at the end
         return ContentUris.withAppendedId(uri, id);
-    }
-
-
-    @Override
-    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-
-        final int match = uriMatcher.match(uri);
-        switch (match){
-            case CLUBS:
-                //delete all rows match both selection and selectionArgs
-                return database.delete(ClubEntry.TABLE_NAME, selection, selectionArgs);
-            case CLUB_ID:
-                //delete a single row given by ID in the URI
-                selection = ClubEntry._ID + "=?";
-                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                return database.delete(ClubEntry.TABLE_NAME, selection, selectionArgs);
-            default:
-                throw new IllegalArgumentException("Deletion is not supported for " + uri);
-        }
     }
 
     @Override
@@ -206,8 +178,8 @@ public class ClubProvider extends ContentProvider {
 
         if (values.containsKey(ClubEntry.COLUMN_FOUNDATION_YEAR)){
             Integer year = values.getAsInteger(ClubEntry.COLUMN_FOUNDATION_YEAR);
-            if (year < 1850 && year > 2017){
-                throw new IllegalArgumentException("Please insert a number betwenn 1850 to 2017");
+            if (year < 1850 || year > 2017){
+                throw new IllegalArgumentException("Please insert a number between 1850 to 2017");
             }
         }
         if (values.size() == 0)
@@ -215,6 +187,54 @@ public class ClubProvider extends ContentProvider {
 
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
-        return database.update(ClubEntry.TABLE_NAME, values, selection, selectionArgs);
+        // Perform the update on the database and get the number of rows affected
+        int rowsUpdated = database.update(ClubEntry.TABLE_NAME, values, selection, selectionArgs);
+
+        // If 1 or more rows were updated, then notify all listeners that the data at the
+        // given URI has changed
+        if (rowsUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsUpdated;
+    }
+
+    @Override
+    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        int rowsDeleted;
+
+        final int match = uriMatcher.match(uri);
+        switch (match){
+            case CLUBS:
+                //delete all rows match both selection and selectionArgs
+                rowsDeleted = database.delete(ClubEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case CLUB_ID:
+                //delete a single row given by ID in the URI
+                selection = ClubEntry._ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                rowsDeleted = database.delete(ClubEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Deletion is not supported for " + uri);
+        }
+        if (rowsDeleted != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsDeleted;
+    }
+
+    @Override
+    public String getType(@NonNull Uri uri) {
+        final int match = uriMatcher.match(uri);
+        switch (match){
+            case CLUBS:
+                return ClubEntry.CONTENT_LIST_TYPE;
+            case CLUB_ID:
+                return ClubEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI " + uri + " with match" + match);
+        }
     }
 }

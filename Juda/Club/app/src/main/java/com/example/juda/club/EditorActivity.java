@@ -1,6 +1,7 @@
 package com.example.juda.club;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,6 +41,15 @@ import com.example.juda.club.data.ClubDBHelper;
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_editor);
+
+            Intent intent = getIntent();
+            Uri currentUri = intent.getData();
+
+            if (currentUri == null){
+                setTitle(getString(R.string.editor_activity_title_new_club));
+            }else {
+                setTitle(getString(R.string.editor_activity_title_edit_club));
+            }
 
             // Find all relevant views that we will need to read user input from
             clubName = (EditText) findViewById(R.id.edit_club_name);

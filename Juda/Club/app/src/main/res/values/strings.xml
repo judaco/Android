@@ -10,7 +10,9 @@
     <string name="action_delete_all_entries">Delete All Clubs</string>
 
     <!-- Title for the activity to add a new pet [CHAR LIMIT=20] -->
-    <string name="editor_activity_title_new_club">Add a Club</string>
+    <string name="editor_activity_title_new_club">Add a club</string>
+
+    <string name="editor_activity_title_edit_club">Edit club</string>
 
     <!-- Label for editor menu option to save pet and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
@@ -40,5 +42,11 @@
 
     <string name="hint_club_foundation_year">1840</string>
     <string name="title_activity_editor">EditorActivity</string>
+
+    <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">Still no club yet . . . =( </string>
+
+    <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
+    <string name="empty_view_subtitle_text">Get started by adding a club</string>
 
 </resources>

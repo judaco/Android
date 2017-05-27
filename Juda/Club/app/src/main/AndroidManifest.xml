@@ -17,7 +17,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".EditorActivity"
-            android:label="@string/editor_activity_title_new_club"
             android:theme="@style/EditorTheme"
             android:parentActivityName=".ClubActivity" >
             <!-- Parent activity meta-data to support 4.0 and lower -->
