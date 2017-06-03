@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Chatty</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="send_button_label">Send</string>
+
+    <string name="facebook_application_id" translatable="false">APP_ID</string>
+    <!-- Facebook Application ID, prefixed by 'fb'.  Enables Chrome Custom tabs. -->
+    <string name="facebook_login_protocol_scheme" translatable="false">fbAPP_ID</string>
+
+    <string name="twitter_consumer_key" translatable="false">YOURCONSUMERKEY</string>
+    <string name="twitter_consumer_secret" translatable="false">YOURCONSUMERSECRET</string>
+</resources>
