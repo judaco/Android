@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Weathy</string>
+    <string name="search">Search</string>
+    <string name="refresh">Refresh</string>
+
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+
+    <string name="celcius_format">°C</string>
+    <string name="fahrenheit_format">°F</string>
+
+    <string name="errorMessage">An error has occurred. Please click Refresh</string>
+</resources>
