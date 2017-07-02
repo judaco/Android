@@ -2,6 +2,8 @@
     <string name="app_name">Weathy</string>
     <string name="search">Search</string>
     <string name="refresh">Refresh</string>
+    <string name="map">Map</string>
+    <string name="settings">Settings</string>
 
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
@@ -10,4 +12,17 @@
     <string name="fahrenheit_format">°F</string>
 
     <string name="errorMessage">An error has occurred. Please click Refresh</string>
+
+    <!-- Strings for Settings preferences -->
+    <string name="location_title">Location</string>
+    <string name="location_key">location</string>
+    <string name="location_default">Jabotinsky 15, Tel-Aviv, 25425, Israel</string>
+
+    <string name="units_title">Temperature Units</string>
+    <string name="units_key">units</string>
+    <string name="units_metric">Metric</string>
+    <string name="units_metric_key">metric</string>
+    <string name="units_imperial">Imperial</string>
+    <string name="units_imperial_key">imperial</string>
+
 </resources>

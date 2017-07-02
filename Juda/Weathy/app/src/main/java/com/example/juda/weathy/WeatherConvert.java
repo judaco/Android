@@ -37,4 +37,20 @@ public class WeatherConvert {
         String showHighLow = formattedHigh + " / " + formattedLow;
         return showHighLow;
     }
+
+    public static String getFormattedWindSpeed (Context context, float windSpeed, float degrees) {
+        return String.format(context.getString(), windSpeed, )
+    }
+
+    public static String getStringForWeatherCondition(Context context, int weatherId) {
+
+    }
+
+    public static int getSmallArtResourceIdForWeatherCondition(int weatherId) {
+
+    }
+
+    public static int getLargeArtResourceIdForWeatherCondition(int weatherId) {
+
+    }
 }

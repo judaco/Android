@@ -8,33 +8,47 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.net.HttpURLConnection;
 
+import com.example.juda.weathy.data.WeathyContract.WeathyEntry;
+import com.example.juda.weathy.data.WeathyPref;
+
+
 /**
  * Created by Juda on 24/06/2017.
  */
 
-public class WeathyJSON {
+public final class WeathyJSON {
+
+    private static final String W_CITY = "city_name";
+    private static final String W_COORDINATE = "coord";
+
+    private static final String W_LATITUDE = "lat";
+    private static final String W_LONGTITUDE = "lon";
+
+    private static final String W_LIST = "list";
+
+    private static final String W_PRESSURE = "pressure";
+    private static final String W_HUMIDITY = "humidity";
+    private static final String W_WIND = "wind_speed";
+    private static final String W_WIND_DIRECTION = "degree";
+
+    private static final String W_TEMP = "temp";
+    private static final String W_TEMP_MAX = "max";
+    private static final String W_TEMP_MIN = "min";
+
+    private static final String W_WEATHER = "weather";
+    private static final String W_WEATHER_ID = "id";
+    private static final String W_MSG_CODE = "cod";
 
     public static String [] getStringsFromJson (Context context, String jsonForecastString)
         throws JSONException{
-        final String W_LIST = "list";
-
-        final String W_TEMPERATURE = "temp";
-
-        final String W_MAX = "max";
-        final String W_MIN = "min";
-
-        final String W_WEATHER = "weather";
-        final String W_DESCRIPTION = "main";
-
-        final String W_MESSAGE_CODE = "cod";
-
-        JSONObject forecastJson = new JSONObject(jsonForecastString);
 
         String [] dataWeatherHolder = null;
 
+        JSONObject jsonForecast = new JSONObject(jsonForecastString);
+
         //Error checking
-        if (forecastJson.has(W_MESSAGE_CODE)){
-            int error = forecastJson.getInt(W_MESSAGE_CODE);
+        if (jsonForecast.has(W_MSG_CODE)){
+            int error = jsonForecast.getInt(W_MSG_CODE);
 
             switch (error) {
                 case HttpURLConnection.HTTP_OK:
@@ -50,7 +64,7 @@ public class WeathyJSON {
             }
         }
 
-        JSONArray weatherArray = forecastJson.getJSONArray(W_LIST);
+        JSONArray weatherArray = jsonForecast.getJSONArray(W_LIST);
         dataWeatherHolder = new String[weatherArray.length()];
 
         long localDate = System.currentTimeMillis();
@@ -63,7 +77,9 @@ public class WeathyJSON {
             long dateTimeInMilliSec;
             double highTemp;
             double lowTemp;
-            String descirption;
+
+            int weatherId;
+            String description;
 
             //JSON object who will show the day
             JSONObject forecastDay = weatherArray.getJSONObject(i);
@@ -72,19 +88,95 @@ public class WeathyJSON {
             date = DateConvert.dateString(context, dateTimeInMilliSec, false);
 
             JSONObject weatherObject = forecastDay.getJSONArray(W_WEATHER).getJSONObject(0);
-            descirption = weatherObject.getString(W_DESCRIPTION);
+            weatherId = weatherObject.getInt(W_WEATHER_ID);
+            description = WeatherConvert.getStringForWeatherCondition(context, weatherId);
 
-            JSONObject tempObject = forecastDay.getJSONObject(W_TEMPERATURE);
-            highTemp = tempObject.getDouble(W_MAX);
-            lowTemp = tempObject.getDouble(W_MIN);
+            JSONObject tempObject = forecastDay.getJSONObject(W_TEMP);
+            highTemp = tempObject.getDouble(W_TEMP_MAX);
+            lowTemp = tempObject.getDouble(W_TEMP_MIN);
             highAndLow = WeatherConvert.formatHighAndLowTemperatures(context, highTemp, lowTemp);
 
-            dataWeatherHolder[i] = date + " - " + descirption + " - " + highAndLow;
+            dataWeatherHolder[i] = date + " - " + description + " - " + highAndLow;
         }
         return dataWeatherHolder;
     }
 
-    public static ContentValues [] getFullDataFromJson (Context context, String jsonForecastString) {
-        return null;
+    public static ContentValues [] getFullDataFromJson (Context context, String jsonForecastString)
+    throws JSONException {
+
+        JSONObject jsonForecast = new JSONObject(jsonForecastString);
+
+        //Error checking
+        if (jsonForecast.has(W_MSG_CODE)){
+            int error = jsonForecast.getInt(W_MSG_CODE);
+
+            switch (error) {
+                case HttpURLConnection.HTTP_OK:
+                    break;
+                case HttpURLConnection.HTTP_NOT_FOUND:
+                    return null;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    return null;
+                case HttpURLConnection.HTTP_BAD_GATEWAY:
+                    return null;
+                default:
+                    return null;
+            }
+        }
+
+        JSONArray jsonArray = jsonForecast.getJSONArray(W_LIST);
+
+        JSONObject jsonCity = jsonForecast.getJSONObject(W_CITY);
+        JSONObject cityCoord = jsonCity.getJSONObject(W_COORDINATE);
+
+        double cityLatitude = cityCoord.getDouble(W_LATITUDE);
+        double cityLongitude = cityCoord.getDouble(W_LONGTITUDE);
+
+        WeathyPref.setLocDetails(context, W_CITY, cityLatitude, cityLongitude);
+
+        ContentValues [] contentValues = new ContentValues[jsonArray.length()];
+
+        long normalUTCStartDay = DateConvert.getNormalUTCDateForToday();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+
+            long dateTimeInMillis;
+            double high;
+            double low;
+            double windSpeed;
+            double windDirection;
+            double pressure;
+            int weatherId;
+            int humidity;
+
+            JSONObject forecastDay = jsonArray.getJSONObject(i);
+
+            dateTimeInMillis = normalUTCStartDay + DateConvert.DAY_IN_MILLISEC * i;
+
+            windSpeed = forecastDay.getDouble(W_WIND);
+            windDirection = forecastDay.getDouble(W_WIND_DIRECTION);
+            pressure = forecastDay.getDouble(W_PRESSURE);
+            humidity = forecastDay.getInt(W_HUMIDITY);
+
+            JSONObject weatherObject = forecastDay.getJSONArray(W_WEATHER).getJSONObject(0);
+            weatherId = weatherObject.getInt(W_WEATHER_ID);
+
+            JSONObject tempObject = forecastDay.getJSONObject(W_TEMP);
+            high = tempObject.getDouble(W_TEMP_MAX);
+            low = tempObject.getDouble(W_TEMP_MIN);
+
+            ContentValues weatherValues = new ContentValues();
+            weatherValues.put(WeathyEntry.COLUMN_DATE, dateTimeInMillis);
+            weatherValues.put(WeathyEntry.COLUMN_TEMP_MAX, high);
+            weatherValues.put(WeathyEntry.COLUMN_TEMP_MIN, low);
+            weatherValues.put(WeathyEntry.COLUMN_WIND, windSpeed);
+            weatherValues.put(WeathyEntry.COLUMN_DEGREES, windDirection);
+            weatherValues.put(WeathyEntry.COLUMN_PRESSURE, pressure);
+            weatherValues.put(WeathyEntry.COLUMN_WEATHY_ID, weatherId);
+            weatherValues.put(WeathyEntry.COLUMN_HUMIDITY, humidity);
+
+            contentValues[i] = weatherValues;
+        }
+        return contentValues;
     }
 }

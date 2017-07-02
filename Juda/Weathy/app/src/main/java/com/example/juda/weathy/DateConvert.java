@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.format.DateUtils;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Juda on 24/06/2017.
@@ -15,6 +16,16 @@ public class DateConvert {
     public static final long MINUTE_IN_MILLISEC = SECOND_IN_MILLISEC * 60;
     public static final long HOUR_IN_MILLISEC = MINUTE_IN_MILLISEC * 60;
     public static final long DAY_IN_MILLISEC = HOUR_IN_MILLISEC * 24;
+
+    public static long getNormalUTCDateForToday() {
+        long utcNowInMillis = System.currentTimeMillis();
+        TimeZone currentTZ = TimeZone.getDefault();
+        long gmtOffSetInMillis = currentTZ.getOffset(utcNowInMillis);
+        long timeSinceEpochLocalTimeInMillis = utcNowInMillis + gmtOffSetInMillis;
+        long daysSinceEpochLocal = TimeUnit.MILLISECONDS.toDays(timeSinceEpochLocalTimeInMillis);
+        long normalUTCMidnightInMillis = TimeUnit.DAYS.toMillis(daysSinceEpochLocal);
+        return normalUTCMidnightInMillis;
+    }
 
     public static long getDayInMillis (long date) {
         TimeZone timeZone = TimeZone.getDefault();
