@@ -63,7 +63,7 @@ public class WeathyPref {
         return userPrefMetric;
     }
 
-    public static double [] getLocMeasures (Context context){
+    public static double [] getLocCoords (Context context){
         return getDefaultWeatherCoordinates();
     }
 

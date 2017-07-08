@@ -67,9 +67,7 @@ public final class WeathyJSON {
         JSONArray weatherArray = jsonForecast.getJSONArray(W_LIST);
         dataWeatherHolder = new String[weatherArray.length()];
 
-        long localDate = System.currentTimeMillis();
-        long UTCDate = DateConvert.getUTCDateFromLocal(localDate);
-        long startingDay = DateConvert.normalDate(UTCDate);
+        long startingDay = DateConvert.getNormalizedUtcDateForToday();
 
         for (int i = 0; i < weatherArray.length(); i++) {
             String date;
@@ -84,8 +82,8 @@ public final class WeathyJSON {
             //JSON object who will show the day
             JSONObject forecastDay = weatherArray.getJSONObject(i);
 
-            dateTimeInMilliSec = startingDay + DateConvert.DAY_IN_MILLISEC * i;
-            date = DateConvert.dateString(context, dateTimeInMilliSec, false);
+            dateTimeInMilliSec = startingDay + DateConvert.DAY_IN_MILLIS * i;
+            date = DateConvert.getFriendlyDateString(context, dateTimeInMilliSec, false);
 
             JSONObject weatherObject = forecastDay.getJSONArray(W_WEATHER).getJSONObject(0);
             weatherId = weatherObject.getInt(W_WEATHER_ID);
@@ -136,7 +134,7 @@ public final class WeathyJSON {
 
         ContentValues [] contentValues = new ContentValues[jsonArray.length()];
 
-        long normalUTCStartDay = DateConvert.getNormalUTCDateForToday();
+        long normalUTCStartDay = DateConvert.getNormalizedUtcDateForToday();
 
         for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -151,7 +149,7 @@ public final class WeathyJSON {
 
             JSONObject forecastDay = jsonArray.getJSONObject(i);
 
-            dateTimeInMillis = normalUTCStartDay + DateConvert.DAY_IN_MILLISEC * i;
+            dateTimeInMillis = normalUTCStartDay + DateConvert.DAY_IN_MILLIS * i;
 
             windSpeed = forecastDay.getDouble(W_WIND);
             windDirection = forecastDay.getDouble(W_WIND_DIRECTION);
