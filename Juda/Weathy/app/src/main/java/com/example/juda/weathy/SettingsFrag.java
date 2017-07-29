@@ -1,5 +1,6 @@
 package com.example.juda.weathy;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.ListPreference;
@@ -7,6 +8,9 @@ import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
+
+import com.example.juda.weathy.data.WeathyContract;
+import com.example.juda.weathy.data.WeathyPref;
 
 /**
  * Created by Juda on 30/06/2017.
@@ -75,12 +79,19 @@ public class SettingsFrag extends PreferenceFragmentCompat implements SharedPref
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Activity activity = getActivity();
+
+        if (key.equals(getString(R.string.location_key))) {
+            WeathyPref.resetLocCoordinates(activity);
+            WeathySync.startSyncImmediate(activity);
+        } else if (key.equals(getString(R.string.units_key))) {
+            activity.getContentResolver().notifyChange(WeathyContract.WeathyEntry.CONTENT_URI, null);
+        }
         Preference preference = findPreference(key);
         if (preference != null) {
             if (!(preference instanceof CheckBoxPreference)) {
                 setPrefSummary(preference, sharedPreferences.getString(key, ""));
             }
         }
-
     }
 }

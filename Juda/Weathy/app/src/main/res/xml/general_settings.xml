@@ -17,4 +17,12 @@
         android:key="@string/units_key"
         android:title="@string/units_title"/>
 
+    <CheckBoxPreference
+        android:defaultValue="@bool/show_notifications_by_default"
+        android:key="@string/notification_key"
+        android:summaryOn="@string/notification_true"
+        android:summaryOff="@string/notification_false"
+        android:title="@string/notification_title"
+        />
+
 </PreferenceScreen>

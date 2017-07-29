@@ -1,8 +1,8 @@
 package com.example.juda.weathy;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.example.juda.weathy.data.WeathyContract;
 import com.example.juda.weathy.data.WeathyPref;
 import com.example.juda.weathy.data.WeathyContract.WeathyEntry;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setElevation(0f);
 
         progressBar = (ProgressBar)findViewById(R.id.progress_bar_loading);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView_weathy);
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements
 
         Bundle bundle = null;
         getSupportLoaderManager().initLoader(FORECAST_LOADER_ID, bundle, this);
+        WeathySync.init(this);
     }
 
     private void loadLocationMap(){
@@ -113,11 +116,10 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onClick(String weatherDay) {
-        Context context = this;
-        Class moveTo = WeathySelector.class;
-        Intent intent = new Intent(context, moveTo);
-        intent.putExtra(Intent.EXTRA_TEXT, weatherDay);
+    public void onClick(long date) {
+        Intent intent = new Intent(MainActivity.this, WeathySelector.class);
+        Uri uriDateClicked = WeathyContract.WeathyEntry.weatherUriWithDateBuilder(date);
+        intent.setData(uriDateClicked);
         startActivity(intent);
     }
 

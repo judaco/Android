@@ -1,0 +1,116 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Weathy</string>
+
+    <string name="owm_app_id">1000</string>
+
+    <string name="city_name">Jerusalem</string>
+    <string name="country_name">Israel</string>
+
+    <string name="today_date">Sunday, 23 July</string>
+    <string name="current_temp">
+        <xliff:g id="temp">%1.0f</xliff:g>\u00B0
+    </string>
+    <string name="temp_condition">Clear Sky</string>
+    <string name="temp_information">30, Mist</string>
+    
+    <string name="wind">Wind</string>
+    <string name="wind_speed">20 km/h</string>
+
+    <string name="humidity">Humidity</string>
+    <string name="humidity_rate">70%</string>
+
+    <string name="day_of_the_week">Sunday</string>
+
+    <string name="location_hint">Please type your city name</string>
+    <string name="location_example">Example, Amman, Jordan</string>
+    <string name="add_new_loc">Add new location</string>
+    <string name="location_stored">You may store up to 10 locations</string>
+    <string name="location_settings">Go to location setting</string>
+
+
+
+
+    <string name="celcius_format">°C</string>
+    <string name="fahrenheit_format">°F</string>
+
+    <string name="place_not_found">Sorry, no weather data found.</string>
+    <string name="permission_notification">This permission is important,
+    but you may choose your location from the Location page</string>
+
+    <!-- Weather Conditions (From OpenWeatherMap) -->
+    <string name="condition_200">Thunderstorm with Light Rain</string>
+    <string name="condition_201">Thunderstorm with Rain</string>
+    <string name="condition_202">Thunderstorm with Heavy Rain</string>
+    <string name="condition_210">Light Thunderstorm</string>
+    <string name="condition_211">Thunderstorm</string>
+    <string name="condition_212">Heavy Thunderstorm</string>
+    <string name="condition_221">Ragged Thunderstorm</string>
+    <string name="condition_230">Thunderstorm with Light Drizzle</string>
+    <string name="condition_231">Thunderstorm with Drizzle</string>
+    <string name="condition_232">Thunderstorm with Heavy Drizzle</string>
+    <string name="condition_300">Light Intensity Drizzle</string>
+    <string name="condition_301">Drizzle</string>
+    <string name="condition_302">Heavy Intensity Drizzle</string>
+    <string name="condition_310">Light Intense Drizzle Rain</string>
+    <string name="condition_311">Drizzle Rain</string>
+    <string name="condition_312">Heavy Intensity Drizzle Rain</string>
+    <string name="condition_313">Shower Rain and Drizzle</string>
+    <string name="condition_314">Heavy Shower Rain and Drizzle</string>
+    <string name="condition_321">Shower Drizzle</string>
+    <string name="condition_500">Light Rain</string>
+    <string name="condition_501">Moderate Rain</string>
+    <string name="condition_502">Heavy Intensity Rain</string>
+    <string name="condition_503">Very Heavy Rain</string>
+    <string name="condition_504">Extreme Rain</string>
+    <string name="condition_511">Freezing Rain</string>
+    <string name="condition_520">Light Intensity Shower Rain</string>
+    <string name="condition_521">Shower Rain</string>
+    <string name="condition_522">Heavy Intensity Shower Rain</string>
+    <string name="condition_531">Ragged Shower Rain</string>
+    <string name="condition_600">Light Snow</string>
+    <string name="condition_601">Snow</string>
+    <string name="condition_602">Heavy Snow</string>
+    <string name="condition_611">Sleet</string>
+    <string name="condition_612">Shower Sleet</string>
+    <string name="condition_615">Light Rain and Snow</string>
+    <string name="condition_616">Rain and Snow</string>
+    <string name="condition_620">Light Shower Snow</string>
+    <string name="condition_621">Shower Snow</string>
+    <string name="condition_622">Heavy Shower Snow</string>
+    <string name="condition_701">Mist</string>
+    <string name="condition_711">Smoke</string>
+    <string name="condition_721">Haze</string>
+    <string name="condition_731">Sand, Dust Whirls</string>
+    <string name="condition_741">Fog</string>
+    <string name="condition_751">Sand</string>
+    <string name="condition_761">Dust</string>
+    <string name="condition_762">Volcanic Ash</string>
+    <string name="condition_771">Squalls</string>
+    <string name="condition_781">Tornado</string>
+    <string name="condition_800">Clear</string>
+    <string name="condition_801">Mostly Clear</string>
+    <string name="condition_802">Scattered Clouds</string>
+    <string name="condition_803">Broken Clouds</string>
+    <string name="condition_804">Overcast Clouds</string>
+    <string name="condition_900">Tornado</string>
+    <string name="condition_901">Tropical Storm</string>
+    <string name="condition_902">Hurricane</string>
+    <string name="condition_903">Cold</string>
+    <string name="condition_904">Hot</string>
+    <string name="condition_905">Windy</string>
+    <string name="condition_906">Hail</string>
+    <string name="condition_951">Calm</string>
+    <string name="condition_952">Light Breeze</string>
+    <string name="condition_953">Gentle Breeze</string>
+    <string name="condition_954">Breeze</string>
+    <string name="condition_955">Fresh Breeze</string>
+    <string name="condition_956">Strong Breeze</string>
+    <string name="condition_957">High Wind</string>
+    <string name="condition_958">Gale</string>
+    <string name="condition_959">Severe Gale</string>
+    <string name="condition_960">Storm</string>
+    <string name="condition_961">Violent Storm</string>
+    <string name="condition_962">Hurricane</string>
+
+    <string name="condition_unknown">Unknown (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
+</resources>

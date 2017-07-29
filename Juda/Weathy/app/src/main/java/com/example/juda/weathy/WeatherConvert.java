@@ -382,7 +382,7 @@ public final class WeatherConvert {
         return R.drawable.hail_storm;
     }
 
-    //public static int getLargeArtResourceIdForWeatherCondition(int weatherId) {
-
-   // }
+    public static int getLargeArtResourceIdForWeatherCondition(int weatherId) {
+        return 0;
+   }
 }

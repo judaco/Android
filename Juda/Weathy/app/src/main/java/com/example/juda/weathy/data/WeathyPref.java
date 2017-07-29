@@ -70,4 +70,40 @@ public class WeathyPref {
     public static boolean isLocLatLonAvailialbe (Context context){
         return false;
     }
+
+    public static boolean isNotificationEnabled(Context context) {
+        String displayNotifKey = context.getString(R.string.notification_key);
+
+        boolean displayNotifDeafualt = context.getResources()
+                .getBoolean(R.bool.show_notifications_by_default);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        boolean displayNotif = preferences.getBoolean(displayNotifKey, displayNotifDeafualt);
+
+        return displayNotif;
+    }
+
+    public static long getLastNotifInMillis(Context context) {
+        String lastNotifKey = context.getString(R.string.last_notification);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        long lastNotifTime = preferences.getLong(lastNotifKey, 0);
+
+        return  lastNotifTime;
+    }
+
+    public static long getLastNotifSinceElapsed(Context context) {
+        long lastNotifInMillis = WeathyPref.getLastNotifInMillis(context);
+        long timeSinceLastNotif = System.currentTimeMillis() - lastNotifInMillis;
+        return  timeSinceLastNotif;
+    }
+
+    public static void  saveLastNotif(Context context, long notifTime) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        String lastNotifKey = context.getString(R.string.last_notification);
+        editor.putLong(lastNotifKey, notifTime);
+        editor.apply();
+    }
 }

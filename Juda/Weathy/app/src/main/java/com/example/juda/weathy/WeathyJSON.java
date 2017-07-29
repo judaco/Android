@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import com.example.juda.weathy.data.WeathyContract.WeathyEntry;
 import com.example.juda.weathy.data.WeathyPref;
 
+import static android.text.format.DateUtils.DAY_IN_MILLIS;
 
 /**
  * Created by Juda on 24/06/2017.
@@ -67,7 +68,7 @@ public final class WeathyJSON {
         JSONArray weatherArray = jsonForecast.getJSONArray(W_LIST);
         dataWeatherHolder = new String[weatherArray.length()];
 
-        long startingDay = DateConvert.getNormalizedUtcDateForToday();
+        long startingDay = DateConvert.getNormalUTCDateForToday();
 
         for (int i = 0; i < weatherArray.length(); i++) {
             String date;
@@ -82,8 +83,8 @@ public final class WeathyJSON {
             //JSON object who will show the day
             JSONObject forecastDay = weatherArray.getJSONObject(i);
 
-            dateTimeInMilliSec = startingDay + DateConvert.DAY_IN_MILLIS * i;
-            date = DateConvert.getFriendlyDateString(context, dateTimeInMilliSec, false);
+            dateTimeInMilliSec = startingDay + DAY_IN_MILLIS * i;
+            date = DateConvert.dateConvertToString(context, dateTimeInMilliSec, false);
 
             JSONObject weatherObject = forecastDay.getJSONArray(W_WEATHER).getJSONObject(0);
             weatherId = weatherObject.getInt(W_WEATHER_ID);
@@ -134,7 +135,7 @@ public final class WeathyJSON {
 
         ContentValues [] contentValues = new ContentValues[jsonArray.length()];
 
-        long normalUTCStartDay = DateConvert.getNormalizedUtcDateForToday();
+        long normalUTCStartDay = DateConvert.getNormalUTCDateForToday();
 
         for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -149,7 +150,7 @@ public final class WeathyJSON {
 
             JSONObject forecastDay = jsonArray.getJSONObject(i);
 
-            dateTimeInMillis = normalUTCStartDay + DateConvert.DAY_IN_MILLIS * i;
+            dateTimeInMillis = normalUTCStartDay + DAY_IN_MILLIS * i;
 
             windSpeed = forecastDay.getDouble(W_WIND);
             windDirection = forecastDay.getDouble(W_WIND_DIRECTION);
