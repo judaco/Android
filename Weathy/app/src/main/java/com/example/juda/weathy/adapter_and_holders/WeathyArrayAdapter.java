@@ -51,7 +51,7 @@ public class WeathyArrayAdapter extends ArrayAdapter<JsonObjectList> {
         }
         JsonObjectList jsonObjectList = items.get(position);
         if (jsonObjectList != null) {
-            TextView jsonObjectListLabel = (TextView)view.findViewById(R.id.);
+            TextView jsonObjectListLabel = (TextView)view.findViewById(R.id.text_completion);
             if (jsonObjectListLabel != null) {
                 jsonObjectListLabel.setText(jsonObjectList.getName() + "," + jsonObjectList.getCountry());;
             }

@@ -7,6 +7,4 @@
     android:background="#1647ea"
     tools:context="com.example.juda.weathy.MainActivity">
 
-
-
 </android.support.constraint.ConstraintLayout>

@@ -12,7 +12,7 @@
     </string>
     <string name="temp_condition">Clear Sky</string>
     <string name="temp_information">30, Mist</string>
-    
+
     <string name="wind">Wind</string>
     <string name="wind_speed">20 km/h</string>
 
@@ -26,8 +26,7 @@
     <string name="add_new_loc">Add new location</string>
     <string name="location_stored">You may store up to 10 locations</string>
     <string name="location_settings">Go to location setting</string>
-
-
+    <string name="location_button">Go to location button</string>
 
 
     <string name="celcius_format">°C</string>
@@ -113,4 +112,5 @@
     <string name="condition_962">Hurricane</string>
 
     <string name="condition_unknown">Unknown (<xliff:g id="conditionId">%1$d</xliff:g>)</string>
+    <string name="title_activity_add_location">AddLocation</string>
 </resources>

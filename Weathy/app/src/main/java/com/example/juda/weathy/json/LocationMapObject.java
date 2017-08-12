@@ -1,0 +1,94 @@
+package com.example.juda.weathy.json;
+
+import com.example.juda.weathy.Coord;
+
+import java.util.List;
+
+/**
+ * Created by Juda on 06/08/2017.
+ */
+
+public class LocationMapObject {
+
+    private Coord coord;
+    private List<WeatherResults> weather;
+    private String base;
+    private Main main;
+    private String visibility;
+    private Wind wind;
+    private Rain rain;
+    private Clouds clouds;
+    private String dt;
+    private Sys sys;
+    private String id;
+    private String name;
+    private String cod;
+
+    public LocationMapObject(Coord coord, List<WeatherResults> weather, String base, Main main, String visibility, Wind wind, Rain rain, Clouds clouds, String dt, Sys sys, String id, String name, String cod) {
+        this.coord = coord;
+        this.weather = weather;
+        this.base = base;
+        this.main = main;
+        this.visibility = visibility;
+        this.wind = wind;
+        this.rain = rain;
+        this.clouds = clouds;
+        this.dt = dt;
+        this.sys = sys;
+        this.id = id;
+        this.name = name;
+        this.cod = cod;
+    }
+
+    public Coord getCoord() {
+        return coord;
+    }
+
+    public List<WeatherResults> getWeather() {
+        return weather;
+    }
+
+    public String getBase() {
+        return base;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public Wind getWind() {
+        return wind;
+    }
+
+    public Rain getRain() {
+        return rain;
+    }
+
+    public Clouds getClouds() {
+        return clouds;
+    }
+
+    public String getDt() {
+        return dt;
+    }
+
+    public Sys getSys() {
+        return sys;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCod() {
+        return cod;
+    }
+}
