@@ -1,11 +1,12 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.juda.bbexample.MapsActivity"
-    android:background="@color/green">
+    android:background="@color/green"
+    tools:context="com.bikebeacon.ui.MapsActivity">
 
     <fragment
         android:id="@+id/map"
@@ -27,7 +28,8 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout="@layout/activity_maps" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/settings"
@@ -47,7 +49,7 @@
         map:layout_constraintTop_toTopOf="parent"
         map:layout_constraintVertical_bias="0.017"
         map:rippleColor="@color/cast_intro_overlay_background_color"
-        map:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+        map:srcCompat="@android:drawable/ic_menu_sort_by_size"/>
 
     <TextView
         android:id="@+id/speed"
@@ -57,7 +59,7 @@
         android:text="Speed:"
         android:textColor="@android:color/white"
         map:layout_constraintBaseline_toBaselineOf="@+id/speed_value"
-        map:layout_constraintLeft_toLeftOf="parent" />
+        map:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
         android:id="@+id/speed_value"
@@ -67,11 +69,11 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="24dp"
         android:text="10 km/h"
+        android:textColor="@android:color/white"
         map:layout_constraintHorizontal_bias="0.071"
         map:layout_constraintLeft_toRightOf="@+id/speed"
         map:layout_constraintRight_toRightOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/map"
-        android:textColor="@android:color/white"/>
+        map:layout_constraintTop_toBottomOf="@+id/map"/>
 
     <TextView
         android:id="@+id/longitude"
@@ -79,9 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="Longitude:"
+        android:textColor="@android:color/white"
         map:layout_constraintBaseline_toBaselineOf="@+id/lon_value"
-        map:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@android:color/white"/>
+        map:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
         android:id="@+id/latitude"
@@ -89,36 +91,36 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="Latitude:"
+        android:textColor="@android:color/white"
         map:layout_constraintBaseline_toBaselineOf="@+id/lat_value"
-        map:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@android:color/white"/>
+        map:layout_constraintLeft_toLeftOf="parent"/>
 
-        <TextView
-            android:id="@+id/lat_value"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="31.768319"
-            android:layout_marginTop="16dp"
-            map:layout_constraintTop_toBottomOf="@+id/speed_value"
-            android:layout_marginRight="16dp"
-            map:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
-            map:layout_constraintLeft_toLeftOf="@+id/speed_value"
-            map:layout_constraintHorizontal_bias="0.497"
-            android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/lat_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:text="31.768319"
+        android:textColor="@android:color/white"
+        map:layout_constraintHorizontal_bias="0.497"
+        map:layout_constraintLeft_toLeftOf="@+id/speed_value"
+        map:layout_constraintRight_toRightOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/speed_value"/>
 
-        <TextView
-            android:id="@+id/lon_value"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="35.213710"
-            android:layout_marginTop="16dp"
-            map:layout_constraintTop_toBottomOf="@+id/lat_value"
-            android:layout_marginRight="16dp"
-            map:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
-            map:layout_constraintLeft_toLeftOf="@+id/lat_value"
-            map:layout_constraintHorizontal_bias="0.0"
-            android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/lon_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:text="35.213710"
+        android:textColor="@android:color/white"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintLeft_toLeftOf="@+id/lat_value"
+        map:layout_constraintRight_toRightOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/lat_value"/>
 
 </android.support.constraint.ConstraintLayout>
