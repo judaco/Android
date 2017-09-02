@@ -1,17 +1,18 @@
 package com.bikebeacon.ui;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juda.bbexample.R;
+import com.google.android.gms.maps.MapFragment;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends MapsActivity {
 
     Switch lowPowerMode;
     Switch mapDraw;
@@ -69,5 +70,17 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void showHideFragmentMap (final MapFragment mapFragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+
+        if (mapFragment.isHidden()) {
+            fragmentTransaction.show(mapFragment);
+        } else {
+            fragmentTransaction.hide(mapFragment);
+        }
+        fragmentTransaction.commit();
     }
 }

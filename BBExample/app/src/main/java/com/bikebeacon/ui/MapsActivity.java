@@ -16,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -64,12 +66,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int REQUEST_CHECK_SETTINGS = 2;
+    private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
     private GoogleApiClient apiClient;
     private Location lastLocation;
 
     private LocationRequest locationRequest;
     private boolean locationUpdate;
+
+    private double mLatitude;
+    private double mLongitude;
 
     private GoogleMap mMap;
     private FloatingActionButton settings;
@@ -84,10 +90,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    final SupportMapFragment fragment = SupportMapFragment.newInstance();
+//                    getSupportFragmentManager().beginTransaction()
+//                            .add(R.id.map, fragment).commit();
+//                    fragment.getMapAsync(MapsActivity.this);
+//                }catch (Exception ignored){
+//
+//                }
+//            }
+//        });
 
         requestPermission(Manifest.permission.ACCESS_FINE_LOCATION, LOCATION_PERMISSION_REQUEST_CODE);
 
@@ -98,6 +118,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         longitude = (TextView) findViewById(R.id.longitude);
         latValue = (TextView) findViewById(R.id.lat_value);
         lonValue = (TextView) findViewById(R.id.lon_value);
+
+        NumberFormat number = NumberFormat.getNumberInstance();
+        latValue.setText(number.format(mLatitude));
+        lonValue.setText(number.format(mLongitude));
 
         if (apiClient == null) {
             apiClient = new GoogleApiClient.Builder(this)
@@ -122,7 +146,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * @param permissionType
      * @param requestCode
      */
-    protected void requestPermission (String permissionType, int requestCode) {
+    protected void requestPermission(String permissionType, int requestCode) {
         int permission = ContextCompat.checkSelfPermission(this, permissionType);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{permissionType}, requestCode);
@@ -192,6 +216,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onStop() {
         super.onStop();
         if (apiClient != null && apiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(apiClient, this);
             apiClient.disconnect();
         }
     }
@@ -224,13 +249,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             placeMarkerOnMap(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()));
         }
 
-        MapTask mapTask = new MapTask();
-
-        mapTask.execute();
+        mLatitude = lastLocation.getLatitude();
+        mLongitude = lastLocation.getLongitude();
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+
         setUpMap();
         if (locationUpdate) {
             startLocationUpdates();
@@ -244,7 +269,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        if (connectionResult.hasResolution()) {
+            try {
+                connectionResult.startResolutionForResult(this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e("Error", "Location services connection failed with code " + connectionResult.getErrorCode());
+        }
     }
 
     @Override
@@ -288,19 +321,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
     }
 
-    private class MapTask extends AsyncTask<Object, Void, Object> {
+    public class MapTask extends AsyncTask<LatLng, Void, Marker> {
 
         @Override
-        protected Object doInBackground(Object... objects) {
-            setUpMap();
-            return null;
+        protected Marker doInBackground(LatLng... latLngs) {
+            LatLng location = new LatLng(30.000, 32.00000);
+            MarkerOptions markerOptions = new MarkerOptions().position(location).title("new location");
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource
+                    (getResources(), R.mipmap.user_location)));
+            String string = getAddress(location);
+            markerOptions.title(string);
+            return mMap.addMarker(markerOptions);
         }
 
         @Override
-        protected void onPostExecute(Object o) {
-            LatLng latLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-
-            mMap.addMarker(new MarkerOptions().position(latLng));
+        protected void onPostExecute(Marker marker) {
+            super.onPostExecute(marker);
         }
     }
 
@@ -309,19 +345,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      *
      * @param location
      */
-    protected void placeMarkerOnMap(LatLng location) {
-        //Create a MarkerOptions object and sets the user’s current location as the position for the marker.
-        MarkerOptions markerOptions = new MarkerOptions().position(location).title("new position");
-        //Create a unique marker with a custom icon.
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource
-                (getResources(), R.mipmap.user_location)));
+    protected void placeMarkerOnMap(final LatLng location) {
+        MapTask.execute(new Runnable() {
+            @Override
+            public void run() {
 
-        //Add an address as a marker title.
-        String string = getAddress(location);
-        markerOptions.title(string);
-
-        //Add the marker to the Map
-        mMap.addMarker(markerOptions);
+            }
+        });
+//        //Create a MarkerOptions object and sets the user’s current location as the position for the marker.
+//        MarkerOptions markerOptions = new MarkerOptions().position(location).title("new position");
+//        //Create a unique marker with a custom icon.
+//        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource
+//                (getResources(), R.mipmap.user_location)));
+//
+//        //Add an address as a marker title.
+//        String string = getAddress(location);
+//        markerOptions.title(string);
+//
+//        //Add the marker to the Map
+//        mMap.addMarker(markerOptions);
     }
 
     /**
@@ -410,4 +452,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+
 }
