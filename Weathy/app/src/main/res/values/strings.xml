@@ -36,6 +36,13 @@
     <string name="permission_notification">This permission is important,
     but you may choose your location from the Location page</string>
 
+    <string name="city_country">Jerusalem, ISrael</string>
+    <string name="current_temperature">18</string>
+    <string name="weather_information">Sunny and Clear</string>
+    <string name="date_today">Sep 8th, 2017</string>
+    <string name="delete_text">Delete</string>
+
+
     <!-- Weather Conditions (From OpenWeatherMap) -->
     <string name="condition_200">Thunderstorm with Light Rain</string>
     <string name="condition_201">Thunderstorm with Rain</string>

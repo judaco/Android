@@ -1,7 +1,5 @@
 package com.example.juda.weathy;
 
-import android.app.DownloadManager;
-import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -76,7 +74,7 @@ public class ListLocation extends AppCompatActivity{
 
     private void requestJsonObj(final  DatabaseLocationObject param) {
         String url =  "http://api.openweathermap.org/data/2.5/weather?q="+param.getLocation()
-                +"&APPID=62f6de3f7c0803216a3a13bbe4ea9914&units=metric";
+                +"&APPID=8fc357cff194885b910409cd0842f93a";
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

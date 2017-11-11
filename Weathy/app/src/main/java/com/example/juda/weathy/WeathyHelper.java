@@ -57,7 +57,7 @@ public class WeathyHelper extends Application {
         Collections.sort(messages, new Comparator<JsonObjectList>() {
             @Override
             public int compare(JsonObjectList jsonObjectList, JsonObjectList t1) {
-                return jsonObjectList.getName().compareCase(t1.getName());
+                return jsonObjectList.getName().compareToIgnoreCase(t1.getName());
             }
         });
         return messages;

@@ -28,7 +28,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationHolders> imple
     protected Context context;
     private List<RadioButtonObject> allRadioButton;
     private DatabaseQuery databaseQuery;
-    int[] id = new int [][R.id.button0];
+    int[] id = new int []{R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5};
     private WeathySharedPref sharedPref;
     public LocationAdapter(Context context, List<LocationObject> locationObjects) {
         this.locationObjects = locationObjects;

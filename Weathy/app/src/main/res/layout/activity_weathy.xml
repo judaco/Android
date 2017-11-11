@@ -20,7 +20,7 @@
             android:text="@string/city_country"
             android:textSize="@dimen/_24sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/white"/>
         <TextView
             android:id="@+id/current_date"
             android:layout_width="wrap_content"
@@ -29,14 +29,14 @@
             android:text="@string/date_today"
             android:textSize="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/white"/>
         <ImageView
             android:id="@+id/weather_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/sun"
+            android:src="@drawable/clear_day"
             android:layout_marginTop="@dimen/_24sdp"/>
 
         <com.github.pavlospt.CircleView
@@ -45,10 +45,10 @@
             android:layout_height="@dimen/_150sdp"
             android:layout_marginTop="@dimen/_8sdp"
             app:cv_titleSubtitleSpace="40"
-            app:cv_fillColor="@color/colorBackground"
-            app:cv_strokeColorValue="@color/colorCircleStroke"
-            app:cv_backgroundColorValue="@color/colorCircleStroke"
-            app:cv_titleColor="@color/colorWhite"
+            app:cv_fillColor="@color/colorPrimary"
+            app:cv_strokeColorValue="@color/colorPrimaryDark"
+            app:cv_backgroundColorValue="@color/colorPrimaryDark"
+            app:cv_titleColor="@color/white"
             app:cv_titleSize="@dimen/_50sdp"
             app:cv_titleText="@string/current_temperature"
             app:cv_subtitleSize="@dimen/_12sdp"
@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorSubTitle"
+                    android:textColor="@color/green"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
                     android:text="@string/wind"/>
@@ -78,7 +78,7 @@
                     android:id="@+id/wind_result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:layout_marginTop="@dimen/_4sdp"
                     android:text="@string/wind_speed"/>
@@ -96,7 +96,7 @@
                     android:background="@android:color/transparent"
                     android:elevation="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:src="@drawable/cross"/>
+                    android:src="@drawable/clear_day"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -107,7 +107,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorSubTitle"
+                    android:textColor="@color/red"
                     android:textSize="@dimen/_14sdp"
                     android:layout_gravity="right"
                     android:textStyle="bold"
@@ -116,7 +116,7 @@
                     android:id="@+id/humidity_result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/_14sdp"
                     android:layout_marginTop="@dimen/_4sdp"
@@ -128,7 +128,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:background="@color/colorBottomBackground"
+        android:background="@color/blue"
         android:orientation="vertical">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/weather_daily_list"

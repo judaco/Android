@@ -1,7 +1,6 @@
 package com.example.juda.weathy;
 
 import android.Manifest;
-import android.app.DownloadManager;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,8 +43,6 @@ import com.example.juda.weathy.json.LocationMapObject;
 import com.github.pavlospt.CircleView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -122,17 +119,17 @@ public class WeathyActivity extends AppCompatActivity implements LocationListene
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 2, this);
                 if (locationManager != null) {
                     location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    apiUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&APPID=62f6de3f7c0803216a3a13bbe4ea9914&units=metric";
+                    apiUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + location.getLatitude() + "&lon=" + location.getLongitude() + "&APPID=8fc357cff194885b910409cd0842f93a";
                     createJsonObject(apiUrl);
                 }
             } else {
                 //Make API call with a city name
                 String storedCityName = sharedPref.getLocationInPref();
-                System.out.println("Stored cuty " + storedCityName);
+                System.out.println("Stored city " + storedCityName);
                 String[] city = storedCityName.split(",");
                 if (TextUtils.isEmpty(city[0])) {
                     System.out.println("Stored city " + city[0]);
-                    String url = "http://api.openweathermap.org/data/2.5/weather?q=" + city[0] + "&APPID=62f6de3f7c0803216a3a13bbe4ea9914&units=metric";
+                    String url = "http://api.openweathermap.org/data/2.5/weather?q=" + city[0] + "&APPID=8fc357cff194885b910409cd0842f93a";
                     createJsonObject(url);
                 }
             }
@@ -208,10 +205,10 @@ public class WeathyActivity extends AppCompatActivity implements LocationListene
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 2, this);
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        apiUrl = "http://api.openweathermap.org/data/2.5/weather?lat="+location.getLatitude()+"&lon="+location.getLongitude()+"&APPID=62f6de3f7c0803216a3a13bbe4ea9914&units=metric";
+                        apiUrl = "http://api.openweathermap.org/data/2.5/weather?lat="+location.getLatitude()+"&lon="+location.getLongitude()+"&APPID=8fc357cff194885b910409cd0842f93a";
                         createJsonObject(apiUrl);
                     }else{
-                        apiUrl = "http://api.openweathermap.org/data/2.5/weather?lat=51.5074&lon=0.1278&APPID=62f6de3f7c0803216a3a13bbe4ea9914&units=metric";
+                        apiUrl = "http://api.openweathermap.org/data/2.5/weather?lat=35.000&lon=32.000&APPID=8fc357cff194885b910409cd0842f93a";
                         createJsonObject(apiUrl);
                     }
                 }
@@ -270,7 +267,7 @@ public class WeathyActivity extends AppCompatActivity implements LocationListene
     }
 
     private void fiveDaysApiJsonObjectCall(String city) {
-        String apiUrl = "http://api.openweathermap.org/data/2.5/forecast?q="+city+ "&APPID=62f6de3f7c0803216a3a13bbe4ea9914&units=metric";
+        String apiUrl = "http://api.openweathermap.org/data/2.5/forecast?q="+city+ "&APPID=8fc357cff194885b910409cd0842f93a";
         final List<WeathyObject> weekDays = new ArrayList<WeathyObject>();
         StringRequest request = new StringRequest(Request.Method.GET, apiUrl, new Response.Listener<String>() {
             @Override

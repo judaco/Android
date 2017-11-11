@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1647ea"
+    android:background="#c8d1ed"
     tools:context="com.example.juda.weathy.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to Weathy!"
+        android:textColor="@color/blue"
+        tools:layout_editor_absoluteY="224dp"
+        tools:layout_editor_absoluteX="116dp" />
 
 </android.support.constraint.ConstraintLayout>

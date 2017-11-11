@@ -26,15 +26,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecylerViewHolders
 
     @Override
     public RecylerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecylerViewHolders viewHolders = null;
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.id., parent, false);
-        viewHolders = new RecylerViewHolders(view);
-        return viewHolders;
+        RecylerViewHolders viewHolder = null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.daily_weather_list, parent, false);
+        viewHolder = new RecylerViewHolders(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecylerViewHolders holder, int position) {
-        holder.day.setText(daily.get(position).);
+        holder.day.setText(daily.get(position).getDay());
+        holder.weatherIcon.setImageResource(daily.get(position).getWeatherIcon());
+        double temp = Double.parseDouble(daily.get(position).getWeatherResult());
+        holder.weatherResult.setText(String.valueOf(Math.round(temp)) + "°");
+        holder.weatherResultSmall.setText(daily.get(position).getSmallWeatherResult());
+        holder.weatherResultSmall.setVisibility(View.GONE);
     }
 
     @Override
