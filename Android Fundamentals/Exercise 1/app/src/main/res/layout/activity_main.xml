@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.juda.myapplication.MainActivity">
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="@dimen/width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="@string/message_hint"
+        android:inputType="text"
+        android:textSize="@dimen/textSize"
+        app:layout_constraintBottom_toTopOf="@+id/activity_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/activity_button"
+        android:layout_width="@dimen/width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/activity_button"
+        app:layout_constraintBottom_toTopOf="@+id/email_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="openActivity"
+        android:textSize="@dimen/textSize"/>
+
+    <Button
+        android:id="@+id/email_button"
+        android:layout_width="@dimen/width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/email_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="openEmail"
+        android:textSize="@dimen/textSize"/>
+
+</android.support.constraint.ConstraintLayout>

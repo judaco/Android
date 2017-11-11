@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="juda.cityguide.MainActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/jrs"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/jerusalem_image"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/photo"
+                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:text="@string/image_title"
+                android:textColor="@color/colorWhite"
+                android:textSize="24sp"
+                tools:textColorHighlight="@android:color/holo_blue_bright" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:layout_weight="7">
+
+            <TextView
+                android:id="@+id/foundation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/founded"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/foundation_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/population"
+                android:text="@string/foundation_year" />
+
+
+            <TextView
+                android:id="@+id/population"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/foundation"
+                android:text="@string/population"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/population_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/population"
+                android:layout_alignBottom="@+id/population"
+                android:layout_marginStart="11dp"
+                android:layout_toEndOf="@+id/population"
+                android:text="@string/population_amount" />
+
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/population"
+                android:layout_marginTop="16dp"
+                android:text="@string/details"
+                android:textColor="@color/colorBlack"/>
+
+            <TextView
+                android:id="@+id/further_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/details"
+                android:textSize="12sp"
+                android:text="@string/description" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+            <Button
+                android:id="@+id/learn_more"
+                android:layout_width="344dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="@string/learn_more"
+                android:onClick="btnLearn"
+                android:layout_margin="8dp"
+                android:textAllCaps="true"
+                android:background="@color/colorCeleste"
+                android:textColor="@color/colorWhite"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
