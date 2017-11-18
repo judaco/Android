@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Football Clubs List</string>
+    <string name="transition_name_club_img">club</string>
+</resources>
