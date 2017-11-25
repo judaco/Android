@@ -1,0 +1,70 @@
+package com.example.juda.asyncthreads.counter_task;
+
+import android.os.AsyncTask;
+import android.os.SystemClock;
+
+/**
+ * Created by Juda on 25/11/2017.
+ */
+
+public class CounterAsyncTask extends AsyncTask <Integer, Integer, Integer> {
+
+    private IAsyncTaskEvents iAsyncTaskEvents;
+
+    public CounterAsyncTask(IAsyncTaskEvents iAsyncTaskEvents) {
+        this.iAsyncTaskEvents = iAsyncTaskEvents;
+    }
+
+    @Override
+    protected Integer doInBackground(Integer... integers) {
+        int start, end;
+        if (integers.length == 2) {
+            start = integers[0];
+            end = integers[1];
+        } else {
+            start = 0;
+            end = 10;
+        }
+
+        for (int i = start ; i <= end ; i++) {
+            if (isCancelled()) {
+                return i;
+            }
+            publishProgress(i);
+            SystemClock.sleep(500);
+        }
+        return end;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        if (iAsyncTaskEvents != null) {
+            iAsyncTaskEvents.onPreExecute();
+        }
+    }
+
+    @Override
+    protected void onPostExecute(Integer integer) {
+        super.onPostExecute(integer);
+        if (iAsyncTaskEvents != null) {
+            iAsyncTaskEvents.onPostExecute();
+        }
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        if (iAsyncTaskEvents != null) {
+            iAsyncTaskEvents.onProgressUpdate(values[0]);
+        }
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        if (iAsyncTaskEvents != null) {
+            iAsyncTaskEvents.onCancel();
+        }
+    }
+}

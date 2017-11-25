@@ -1,6 +1,7 @@
 package com.example.juda.exercise3.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ViewHolder> {
 
         //Get our custom object from our dataset at this position
         final Club club = mClubs.get(position);
+        //Uri mUri = Uri.parse(club.getImageUrl());
 
         //Bind our views with our data
         holder.clubName.setText(club.getClubName());
