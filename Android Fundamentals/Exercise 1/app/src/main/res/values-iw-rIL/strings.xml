@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">תרגיל 1</string>
-    <string name="message_hint">הכנס את הודעתך כאן</string>
-    <string name="email_button">אימייל</string>
-    <string name="activity_button">אקטיביטי</string>
-    <string name="second_activity">אקטיביטי חדש</string>
-</resources>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="row_height">108dp</dimen>
-    <dimen name="li_club_img_size">100dp</dimen>
-    <dimen name="li_club_img_margin">4dp</dimen>
-    <dimen name="li_trophy_image_size">70dp</dimen>
-</resources>
